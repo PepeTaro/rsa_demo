@@ -1,9 +1,8 @@
 # 簡易RSAアルゴリズムデモ
 簡易RSAアルゴリズムデモ	
 
-![rsa_image](images/rsa_image.png)
 <p align="center" width="100%">
-<img width="600" height="300" src="images/rsa_image.png">
+<img width="500" height="260" src="images/rsa_image.png">
 </p>
 
 
