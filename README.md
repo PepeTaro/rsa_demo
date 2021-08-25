@@ -1,11 +1,6 @@
 # 簡易RSAアルゴリズムデモ
 簡易RSAアルゴリズムデモ	
 
-<p align="center" width="100%">
-<img width="600" height="360" src="images/rsa_image.png">
-</p>
-
-
 # 特徴
 * スクラッチからRSA公開鍵暗号系をPython3を使用して実装
 * 最適化が完全にされていないため鍵生成,暗号化,復号化が既存のライブラリと比較して,著しく遅い
@@ -13,7 +8,7 @@
 * デモのため,ユニットテストが完全ではない
 * ハイブリット暗号ではない(つまり,任意の長さを平文は適度な大きさに分割し,各々を暗号化)
 
-### RSAアルゴリズムを使用してファイルを暗号化(/demo/rsa_demo.py)
+### RSAアルゴリズムを使用したファイル暗号化デモ(/demo/rsa_demo.py)
 ```python
 from rsa_file import encrypt_file,decrypt_file
 
