@@ -80,6 +80,8 @@ class TestNumberTheory(unittest.TestCase):
         self.assertAlmostEqual(exp_mod(2,1234,2),0)
         self.assertAlmostEqual(exp_mod(1,1,1),0)
         self.assertAlmostEqual(exp_mod(1,1,12345),1)
+        self.assertAlmostEqual(exp_mod(2,3,0),8)
+        self.assertAlmostEqual(exp_mod(2,0,2),1)
         
     def test_root_mod(self):
         self.assertAlmostEqual(root_mod(3968039,34781,27040397),22929826)

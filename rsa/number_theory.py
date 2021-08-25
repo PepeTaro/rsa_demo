@@ -170,7 +170,10 @@ def exp_mod(a,k,m):
      a^k(mod m)の値
     """
     
-    assert(is_positive_integer(a) and is_positive_integer(k) and is_positive_integer(m))
+    assert(is_non_negative_integer(k) and is_non_negative_integer(m))
+    if(m == 0): return a**k
+    elif(k == 0): return 1
+    
     b = 1
     while(k>=1):
         if(k%2 == 1):
@@ -234,7 +237,7 @@ def miller_rabin_test(test_number,a):
     if(is_divisible(test_number,2)):# 自明な場合
         return True
 
-    # アルゴリズムは多少複雑なので,Webなどを参考。
+
     k = 0
     q = test_number - 1
     while(is_divisible(q,2)):
