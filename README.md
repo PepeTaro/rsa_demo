@@ -2,6 +2,10 @@
 簡易RSAアルゴリズムデモ	
 
 ![rsa_image](images/rsa_image.png)
+<p align="center" width="100%">
+<img width="600" height="300" src="images/rsa_image.png">
+</p>
+
 
 # 特徴
 * スクラッチからRSA公開鍵暗号系をPython3を使用して実装
