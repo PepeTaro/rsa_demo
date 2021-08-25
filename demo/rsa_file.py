@@ -91,21 +91,10 @@ def encrypt_file(enc_filename,save_filename,pub_key_filename,priv_key_filename):
     save_private_keys(priv_key_filename,(d,p,q))
     save_ciphertext(save_filename,encrypted_text)
     
-def decrypt_file(load_filename,save_filename,pub_key_filename,priv_key_filename):
+def decrypt_file(load_filename,save_filename,priv_key_filename):
     (d,p,q) = load_private_keys(priv_key_filename)
     encrypted_text  = load_ciphertext(load_filename)
     int_form = rsa.decrypt(encrypted_text,d,p,q)    
     binary_form = int_to_image(int_form)
     write_file(save_filename,binary_form)
-    
-def main():
-    """
-    encrypt_file("./data/pepe_wee.jpg","./data/encrypt_pepe_wee.jpg","./data/pub_keys","./data/priv_keys")
-    decrypt_file("./data/encrypt_pepe_wee.jpg","./data/decrypt_pepe_wee.jpg","./data/pub_keys","./data/priv_keys")
-    """
-    
-    encrypt_file("./data/text.txt","./data/encrypt_text.txt","./data/pub_keys","./data/priv_keys")
-    decrypt_file("./data/encrypt_text.txt","./data/decrypt_text.txt","./data/pub_keys","./data/priv_keys")
-    
-if __name__=='__main__':
-    main()
+
