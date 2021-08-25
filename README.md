@@ -2,7 +2,7 @@
 簡易RSAアルゴリズムデモ	
 
 <p align="center" width="100%">
-<img width="500" height="260" src="images/rsa_image.png">
+<img width="600" height="360" src="images/rsa_image.png">
 </p>
 
 
