@@ -1,6 +1,6 @@
 import sys
 import os
-import number_theory
+from . import number_theory
 
 def generate_keys1024():
     return generate_keys(1024)
@@ -19,7 +19,6 @@ def generate_keys(bit_length):
     RSAの公開鍵と秘密鍵のペアを返す。
     引数bit_length(bitの長さであることに注意)は,modulusの長さを指定している。
     """
-    
     e = 65537 # public exponent
 
     (p,q) = generate_prime_pair(bit_length,e)# 素数のペアを生成        
@@ -48,6 +47,8 @@ def generate_prime_pair(bit_length,e):
     p*qのビット長がbit_lengthとほぼ等しくなるような,素数のペア(p,q)を生成し返す。
     (注意) 素数生成にはMiller-Rabin素数判定法を使用しているため,必ず素数を返すとは限らない(ただし,合成数を返す確率は(デフォルト動作において)限りなく0に近い確率)
     """
+
+    assert(bit_length >= 10) #10ビット長以上でないと素数がうまく生成されない(例えば bit_length == 6だと,常にp==qとなる)
     
     while(True):
         while(True):
@@ -60,17 +61,21 @@ def generate_prime_pair(bit_length,e):
         if (p == q): continue   
         elif(p < q):# p > q　となるように調整
             (p,q) = swap(p,q)
-        break
+            break
     
     return (p,q)
 
 def split_plaintext(plaintext,n):
     """
-    引数plaintext(整数)を,modulusである引数nに応じて分割し,その結果を整数のリストとして返す
+    引数plaintext(整数)を,modulusである引数nに応じて分割し,その結果を整数のリストとして返す。
+
+    整数plaintextを,各"ブロック"がn未満となるように分割
+    例) split_plaintext(123456789,100) => [12,34,56,78,9]
     """
+
+    assert(n >= 10) # nが10未満の場合,分割できない
     
-    splitted_plaintext = []
-    
+    splitted_plaintext = []    
     # ブロックに分割しやすくするために,strに変換
     plaintext_str = str(plaintext)
     size = len(plaintext_str)
@@ -85,7 +90,6 @@ def split_plaintext(plaintext,n):
             m = int(plaintext_str[position:position+offset])
             splitted_plaintext.append(m)
             position = position + offset
-            
         else:
             while((position+offset) <= size and int(plaintext_str[position:position+offset]) < n):
                 offset += 1

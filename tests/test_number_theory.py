@@ -1,8 +1,15 @@
 import sys
 import os
+from math import log10,floor
 import unittest
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from rsa.number_theory import *
+
+def get_digit(n):
+    return floor(log10(n))+1
+
+def get_bit_length(n):
+    return n.bit_length()
 
 class TestNumberTheory(unittest.TestCase):
     
@@ -110,10 +117,28 @@ class TestNumberTheory(unittest.TestCase):
         
     def test_generate_n_digit_prime(self):
         # 確率的に正しくない答えを返す場合があるが、確率アルゴリズムなのでしょうがない。
-        self.assertTrue(generate_n_digit_prime(1,1) in [2,3,5,7])
-        self.assertTrue(generate_n_digit_prime(2,100) in [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97])
-        #print(generate_n_digit_prime(100,100))
+        p = generate_n_digit_prime(1)
+        self.assertTrue(p in [2,3,5,7] and get_digit(p) == 1)
         
+        p = generate_n_digit_prime(2)
+        self.assertTrue(p in [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97] and get_digit(p) == 2)
+        
+    def test_generate_n_bits_prime(self):
+        # 確率的に正しくない答えを返す場合があるが、確率アルゴリズムなのでしょうがない。
+        primes = [2,3,5,7,11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+        
+        p = generate_n_bits_prime(2)
+        self.assertTrue(p in primes and get_bit_length(p) >= 2)
+        
+        p = generate_n_bits_prime(3)
+        self.assertTrue(p in primes and get_bit_length(p) >= 3)
+
+        p = generate_n_bits_prime(4)
+        self.assertTrue(p in primes and get_bit_length(p) >= 4)
+
+        p = generate_n_bits_prime(5)
+        self.assertTrue(p in primes and get_bit_length(p) >= 5)
+
 def main():
     unittest.main()
 

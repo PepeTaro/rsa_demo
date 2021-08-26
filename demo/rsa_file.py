@@ -86,7 +86,7 @@ def encrypt_file(enc_filename,save_filename,pub_key_filename,priv_key_filename):
     text = read_file(enc_filename)
     int_form = image_to_int(text)        
     encrypted_text = encrypt(int_form,n,e)
-
+    
     save_public_keys(pub_key_filename,(n,e))
     save_private_keys(priv_key_filename,(d,p,q))
     save_ciphertext(save_filename,encrypted_text)

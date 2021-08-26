@@ -6,7 +6,7 @@
 * 最適化が完全にされていないため鍵生成,暗号化,復号化が既存のライブラリと比較して,著しく遅い
 * デモのため,セキュリティは極めて脆弱
 * デモのため,ユニットテストが完全ではない
-* ハイブリット暗号ではない(つまり,任意の長さを平文は適度な大きさに分割し,各々を暗号化)
+* ハイブリット暗号ではない(つまり,任意の長さの平文は適度な大きさに分割し,各々を暗号化)
 
 ### RSAアルゴリズムを使用したファイル暗号化デモ(/demo/rsa_demo.py)
 ```python
@@ -23,5 +23,24 @@ def main():
 
 if __name__=='__main__':
     main()
-    
+
+### 一般的な例
+
+```python
+from rsa.rsa import *
+
+# 公開鍵の一部であるn(RSA modulus)が少なくとも1024ビット長となるように,公開鍵と秘密鍵のペアを生成
+# (n,e),(d,p,q)がそれぞれ公開鍵,秘密鍵に対応
+[(n,e),(d,p,q)] = generate_keys1024()
+
+plaintext = random.getrandbits(1000) # 1000ビット長の適当な乱数を生成(この整数を暗号化する)
+
+encrypted_text = encrypt(plaintext,n,e) # 暗号化
+decrypted_text = decrypt(encrypted_text,d,p,q) # 復号化
+```
+
+### テスト
+``` bash
+> cd ./tests
+> python3 -m unittest
 ```

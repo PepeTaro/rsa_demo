@@ -339,7 +339,7 @@ def generate_n_bits_prime(bits,tries=100):
     
     """
 
-    assert(is_positive_integer(bits))
+    assert(bits >= 2) # 最小の素数は2(b10)であるため,bitsが１以下はエラー
     
     prime_candidate = random.getrandbits(bits) # 長さがbitsである乱数を生成
     prime_candidate |= 1 # 奇数に調整
